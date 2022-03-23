@@ -1,3 +1,5 @@
+![icon](https://user-images.githubusercontent.com/87713241/159801266-8f0b3bca-32f1-43d7-9ba5-ce8703c48b35.png)
+
 # RevivePlus
 RevivePlus is an plugin for survival/faction/smp servers. 
 
@@ -10,5 +12,3 @@ You can revive players by standing in a 5 block radius of them (configurable).
 
 # Issues
 > Currently none. (i havent tested the plugin out yet lol)
-
-(https://github.com/zPearlss/RevivePlus/icon.svg)
