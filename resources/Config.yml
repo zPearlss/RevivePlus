@@ -1,0 +1,31 @@
+#  _____
+# |  __ \          (_)              _
+# | |__) |_____   _____   _____   _| |_
+# |  _  // _ \ \ / / \ \ / / _ \ |_   _|
+# | | \ \  __/\ V /| |\ V /  __/   |_|
+# |_|  \_\___| \_/ |_| \_/ \___|
+#
+
+#by zPearlss <3
+
+
+# ⭕--------------------⭕ #
+# ⯈ Default Settings ⯇ #
+# ⭕--------------------⭕ #
+
+PLUGIN_ENABLED: true
+
+ENTITY_KEEP_INVENTORY: false #Does the entity that needs reviving keep his/her's inventory?
+
+REVIVE_TIME: 3 #time in seconds.
+REVIVE_RADIUS: 5 #radius in blocks.
+REVIVE_CANCEL_ONHIT: false
+RESTORE_HEALTH_AFTER_REVIVE: true
+RESTORE_FOOD_AFTER_REVIVE: true
+
+NEEDS_REVIVE_SCORETAG_ENABLED: true
+NEEDS_REVIVE_SCORETAG: "§cNeeds to be revived!"
+
+BEING_REVIVED_SCORETAG_ENABLED: true
+BEING_REVIVED_SCORETAG: "§aIs being revived!"
+
