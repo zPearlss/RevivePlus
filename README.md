@@ -11,4 +11,4 @@ You can revive players by standing in a 5 block radius of them (configurable).
 # Issues
 > Currently none. (i havent tested the plugin out yet lol)
 
-![This is an image](https://github.com/zPearlss/RevivePlus/icon.svg)
+!(https://github.com/zPearlss/RevivePlus/icon.svg)
