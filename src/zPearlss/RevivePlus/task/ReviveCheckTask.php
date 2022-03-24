@@ -22,42 +22,47 @@ class ReviveCheckTask extends Task
         if(!empty(($revList = ReviveListener::getReviveablePlayers()))){
             foreach ($revList as $user){
                 $lowerName = strtolower($user->getName());
-                if(($closestEntity = $user->getWorld()->getNearestEntity($user->getPosition(), $maxDistance)) !== null){
-                    if(ConfigUtils::get("BEING_REVIVED_SCORETAG_ENABLED")) {
-                        $tag = ConfigUtils::get("BEING_REVIVED_SCORETAG");
-                        $user->setScoreTag($tag);
-                    }
+                if(($closestEntity = $user->getWorld()->getNearbyEntities($user->getBoundingBox())) !== null) {
+                    foreach ($closestEntity as $entity) {
+                        if ($entity->getPosition()->distance($user->getPosition()) <= $maxDistance) {
+                            if (ConfigUtils::get("BEING_REVIVED_SCORETAG_ENABLED")) {
+                                $tag = ConfigUtils::get("BEING_REVIVED_SCORETAG");
+                                $user->setScoreTag($tag);
+                            }
 
-                    if(!isset($this->timers[$lowerName])){
-                        $this->timers[$lowerName] = $revTime;
-                    }
+                            if (!isset($this->timers[$lowerName])) {
+                                $this->timers[$lowerName] = $revTime;
+                            }
 
-                    if($this->timers[$lowerName] > 0){
-                        $this->timers[$lowerName]--;
-                    }else{
 
-                        $user->getNetworkProperties()->setGenericFlag(EntityMetadataFlags::SLEEPING, false);
-                        $user->setImmobile(false);
+                            if ($this->timers[$lowerName] > 0) {
+                                $this->timers[$lowerName]--;
+                            } else {
 
-                        if(ConfigUtils::get("RESTORE_HEALTH_AFTER_REVIVE")){
-                            $user->setHealth($user->getMaxHealth());
+                                $user->getNetworkProperties()->setGenericFlag(EntityMetadataFlags::SLEEPING, false);
+                                $user->setImmobile(false);
+
+                                if (ConfigUtils::get("RESTORE_HEALTH_AFTER_REVIVE")) {
+                                    $user->setHealth($user->getMaxHealth());
+                                }
+
+                                if (ConfigUtils::get("RESTORE_FOOD_AFTER_REVIVE")) {
+                                    $user->getHungerManager()->setFood(20);
+                                }
+
+                                ReviveListener::removeReviveablePlayer($user);
+                                unset($this->timers[$lowerName]);
+                            }
+                        } else {
+                            if (isset($this->timers[$lowerName])) {
+                                unset($this->timers[$lowerName]);
+                            }
+
+                            if (ConfigUtils::get("NEEDS_REVIVE_SCORETAG_ENABLED")) {
+                                $tag = ConfigUtils::get("NEEDS_REVIVE_SCORETAG");
+                                $user->setScoreTag($tag);
+                            }
                         }
-
-                        if (ConfigUtils::get("RESTORE_FOOD_AFTER_REVIVE")){
-                            $user->getHungerManager()->setFood(20);
-                        }
-
-                        ReviveListener::removeReviveablePlayer($user);
-                        unset($this->timers[$lowerName]);
-                    }
-                }else{
-                    if(isset($this->timers[$lowerName])){
-                        unset($this->timers[$lowerName]);
-                    }
-
-                    if(ConfigUtils::get("NEEDS_REVIVE_SCORETAG_ENABLED")) {
-                        $tag = ConfigUtils::get("NEEDS_REVIVE_SCORETAG");
-                        $user->setScoreTag($tag);
                     }
                 }
             }
