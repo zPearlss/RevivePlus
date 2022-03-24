@@ -8,7 +8,7 @@ use pocketmine\network\mcpe\protocol\types\BlockPosition;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataFlags;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataProperties;
 use pocketmine\player\Player;
-use zPearlss\utils\ConfigUtils;
+use zPearlss\RevivePlus\utils\ConfigUtils;
 
 class ReviveListener implements Listener
 {
